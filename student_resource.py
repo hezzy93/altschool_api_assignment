@@ -4,8 +4,10 @@ from uuid import UUID
 
 app = FastAPI()
 
-
+#create a dictionary
 students = {}
+
+#create the dictionary data
 student_data = {"id": 0, "name": "", "age": 0, "sex": "", "height": 0,}
 
 
@@ -31,7 +33,7 @@ name: str, age: int, sex: str, height: float
 
 #b. Retrieve a Student resource with id (one Student)
 @app.get("/students/{id}")
-def retrieve_student_resource(id: str):
+def retrieve_student_resource(id: int):
     student = students.get(id)
     if not student:
         return {"error": "Student not found!"}
@@ -48,14 +50,13 @@ def retrieve_all_students_resource():
 #c. Update a Student resource
 @app.put("/students{id}")
 def update_student_resource(
-    id: str, name: str, age: int, sex: str, height: float
+    id: int, name: str, age: int, sex: str, height: float
 ):
     student = students.get(id)
     if not student:
         return {"error": "Student not found"}
     
     student["name"] = name
-    student["age"] = age
     student["sex"] = sex
     student["height"] = height
 
@@ -64,14 +65,12 @@ def update_student_resource(
 
 #d. Delete a Student resource
 
-@app.delete("/students/{id}")
-def delete_student_resource(id: str):
+@app.delete("/students/{id}")  # DELETE method to delete a resource
+def delete_student_resource(id: int):
     student = students.get(id)
     if not student:
         return {"error": "Student not found!"}
     
-    del student[id]
+    del students[id]
 
     return {"message": "Student resource deleted successfully"}
-
-
