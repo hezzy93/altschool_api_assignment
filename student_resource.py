@@ -33,7 +33,7 @@ name: str, age: int, sex: str, height: float
 
 #b. Retrieve a Student resource with id (one Student)
 @app.get("/students/{id}")
-def retrieve_student_resource(id: int):
+def retrieve_student_resource(id: str):
     student = students.get(id)
     if not student:
         return {"error": "Student not found!"}
@@ -50,7 +50,7 @@ def retrieve_all_students_resource():
 #c. Update a Student resource
 @app.put("/students{id}")
 def update_student_resource(
-    id: int, name: str, age: int, sex: str, height: float
+    id: str, name: str, age: int, sex: str, height: float
 ):
     student = students.get(id)
     if not student:
@@ -66,7 +66,7 @@ def update_student_resource(
 #d. Delete a Student resource
 
 @app.delete("/students/{id}")  # DELETE method to delete a resource
-def delete_student_resource(id: int):
+def delete_student_resource(id: str):
     student = students.get(id)
     if not student:
         return {"error": "Student not found!"}
